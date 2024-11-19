@@ -143,5 +143,16 @@ def streamlit_app():
     recommendation = generate_recommendation(selected_date, forecasts)
     st.write(f"Recomendación para el día {selected_date}: **{recommendation}**")
 
+# Pie de página
+st.markdown("""
+---
+*EJERCICIO PRÁCTICO 3*
+## **INTEGRANTES**
+* Natasha Villacis
+* Alexander Haro
+* Darwin Ipiales
+* Kempis Guerrero.
+""")
+
 if __name__ == '__main__':
     streamlit_app()
