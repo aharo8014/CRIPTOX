@@ -100,18 +100,18 @@ def generate_recommendation(selected_date, forecasts):
 
 # Streamlit App
 def streamlit_app():
-    st.title("Trading Forecast Platform with Fix")
+    st.title("Plataforma de Previsión de Operaciones con Yahoo Finanzas")
 
     cryptos = ['BTC-USD', 'ETH-USD', 'XRP-USD', 'LTC-USD', 'DOGE-USD']
-    selected_crypto = st.selectbox("Select Cryptocurrency", cryptos, index=0)
+    selected_crypto = st.selectbox("Selecciona la Criptomoneda", cryptos, index=0)
 
     data = extract_historical_data(selected_crypto, start_date='2022-01-01')
     transformed_data = transform_data(data)
 
-    st.write("### Historical Data Overview")
+    st.write("### Datos Históricos")
     plot_historical_data(transformed_data)
 
-    st.write("### Full Historical Data")
+    st.write("### Todos los datos")
     st.dataframe(transformed_data, use_container_width=True)
 
     # Pronósticos
@@ -120,20 +120,20 @@ def streamlit_app():
     sarima_forecast, sarima_model = forecast_sarima(transformed_data)
 
     # Gráficos y tablas para cada modelo
-    st.write("### Polynomial Regression Forecast")
+    st.write("### Regresión Polinómica")
     plot_forecast(poly_forecast, transformed_data, "Polynomial Regression")
     st.dataframe(pd.DataFrame({'Polynomial Forecast': poly_forecast}), use_container_width=True)
 
-    st.write("### ARIMA Forecast")
+    st.write("### ARIMA Pronóstico")
     plot_forecast(arima_forecast, transformed_data, "ARIMA")
     st.dataframe(pd.DataFrame({'ARIMA Forecast': arima_forecast}), use_container_width=True)
 
-    st.write("### SARIMA Forecast")
+    st.write("### SARIMA Pronóstico")
     plot_forecast(sarima_forecast, transformed_data, "SARIMA")
     st.dataframe(pd.DataFrame({'SARIMA Forecast': sarima_forecast}), use_container_width=True)
 
     # Recomendación personalizada
-    st.write("### Recomendación personalizada")
+    st.write("### Recomendación Personalizada")
     selected_date = st.slider("Selecciona un día dentro del rango pronosticado", min_value=1, max_value=30)
     forecasts = {
         'Polynomial': poly_forecast,
